@@ -17,5 +17,5 @@ def main():
         print (f)
         with gzip.open('AWSDynamoDB/01609430713846-ba34aa1b/data/5lc3kqepyu6sjo64cbdpb2xfmu.json.gz', 'r') as fin:
             data = json.loads(fin.read().decode('utf-8'))
-    print (data)
+            print (type(data))
 main()
