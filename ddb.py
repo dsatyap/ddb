@@ -13,8 +13,8 @@ def main():
     #table = ddb.Table(tablename)
     
     files = bucket.objects.filter(Prefix="AWSDynamoDB/01609430713846-ba34aa1b/data/")
-    for f in files:
-        print (f)
+    for obj in files:
+        print('{0}'.format(obj.key))
     
     with gzip.open("AWSDynamoDB/01609430713846-ba34aa1b/data/5lc3kqepyu6sjo64cbdpb2xfmu.json.gz", "r") as fin:
         data = fin.read()
