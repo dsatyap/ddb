@@ -15,9 +15,9 @@ def main():
     files = bucket.objects.filter(Prefix="AWSDynamoDB/01609430713846-ba34aa1b/data/")
     for obj in files:
         print('{0}'.format(obj.key))
-        print (obj.key.split('/'))[-1]
-        f = obj.key.split('/')[-1]
-        print (f)
+        a_list = (obj.key.split('/'))
+        print (a_list[-1])
+
     
     with gzip.open("AWSDynamoDB/01609430713846-ba34aa1b/data/5lc3kqepyu6sjo64cbdpb2xfmu.json.gz", "r") as fin:
         data = fin.read()
