@@ -22,7 +22,7 @@ def main():
         print (b)
 
     
-        with gzip.open(b, "r") as fin:
+        with gzip.open('5lc3kqepyu6sjo64cbdpb2xfmu.json.gz', "r") as fin:
             data = fin.read()
             j = json.loads (data.decode('utf-8'))
             print (type(j))
