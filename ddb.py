@@ -18,10 +18,13 @@ def main():
         a_list = (obj.key.split('/'))
         print (a_list[-1])
 
+        b = str(a_list[-1])
+        print (b)
+
     
-    with gzip.open("AWSDynamoDB/01609430713846-ba34aa1b/data/5lc3kqepyu6sjo64cbdpb2xfmu.json.gz", "r") as fin:
-        data = fin.read()
-        j = json.loads (data.decode('utf-8'))
-        print (type(j))
+        with gzip.open(b, "r") as fin:
+            data = fin.read()
+            j = json.loads (data.decode('utf-8'))
+            print (type(j))
 
 main()
