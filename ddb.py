@@ -16,6 +16,8 @@ def main():
     for obj in files:
         print('{0}'.format(obj.key))
         print (obj.key.split('/'))[-1]
+        f = obj.key.split('/')[-1]
+        print (f)
     
     with gzip.open("AWSDynamoDB/01609430713846-ba34aa1b/data/5lc3kqepyu6sjo64cbdpb2xfmu.json.gz", "r") as fin:
         data = fin.read()
