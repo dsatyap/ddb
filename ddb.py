@@ -3,11 +3,10 @@ import json
 import os
 
 def main():
-    client = boto3.client('s3')
     s3 = boto3.resource("s3")
     bucket = s3.Bucket("careercompassri-test-deploy")
     print (bucket)
     bucket.get_available_subresources()
-    response = client.get_bucket_policy(Bucket='careercompassri-test-deploy')
-    print (response)
+    files = bucket.objects.filter(Prefix="AWSDynamoDB/01609430713846-ba34aa1b/data/*")
+    print (files)
 main()
