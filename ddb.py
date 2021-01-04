@@ -12,8 +12,8 @@ def main():
     print(bucket)
 
     ddb = boto3.resource('dynamodb')
-    #tablename = os.environ['TABLE_NAME']
-    #table = ddb.Table(tablename)
+    tablename = "dlt-CareerCompassRI-dev-Skipper-ProfileTable"
+    table = ddb.Table(tablename)
 
     files = bucket.objects.filter(Prefix="AWSDynamoDB/01609430713846-ba34aa1b/data/")
     for obj in files:
@@ -34,7 +34,8 @@ def main():
         #     print(type(j))
         with gzip.GzipFile(fileobj=obj.get()["Body"]) as gzipfile:
             content = gzipfile.read()
-            j = json.loads(content.decode('utf-8'))
+            fix_bytes_value = content.replace(b"'", b'"')
+            j = json.loads(fix_bytes_value.decode('utf-8'))
         print(type(j))
 
 
