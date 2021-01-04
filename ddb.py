@@ -25,16 +25,5 @@ def main():
         obj.download_fileobj(data)
         new_dict = json.loads(data.getvalue().decode("utf-8"))
         print(new_dict['status']) 
-        
-        # with open (obj_str, 'wb') as objdata:
-        #     obj.download_fileobj(objdata)
-        #     new_dict = json.loads(objdata.getvalue().decode("utf-8"))
-        #     print (type(new_dict))
-        #with gzip.open(contents.getvalue(), "r") as fin:
-    
-        #with gzip.open(obj_str, "r") as fin:
-            """ data = fin.read()
-            j = json.loads (data.decode('utf-8'))
-            print (type(j)) """
 
 main()
