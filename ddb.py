@@ -14,7 +14,7 @@ def main():
 
     ddb = boto3.resource('dynamodb')
     tablename = "dlt-CareerCompassRI-dev-Skipper-ProfileTable"
-    #table = ddb.Table(tablename)
+    table = ddb.Table(tablename)
 
     files = bucket.objects.filter(
         Prefix="AWSDynamoDB/01609430713846-ba34aa1b/data/")
