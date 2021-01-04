@@ -21,8 +21,9 @@ def main():
         print (obj_str)
 
         contents = io.BytesIO()
-        bucket.download_fileobj(obj.key, contents)
+        print (bucket.download_fileobj(obj.key, contents))
         print (contents.seek(0))
+        print (contents.getvalue())
         with gzip.open(contents.getvalue(), "r") as fin:
     
         #with gzip.open(obj_str, "r") as fin:
