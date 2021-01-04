@@ -22,7 +22,7 @@ def main():
 
         contents = io.BytesIO()
         bucket.download_fileobj(obj.key, contents)
-        contents.seek(0)
+        print (contents.seek(0))
         with gzip.open(contents.getvalue(), "r") as fin:
     
         #with gzip.open(obj_str, "r") as fin:
