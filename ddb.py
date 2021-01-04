@@ -26,19 +26,16 @@ def main():
         obj_str = str(obj_list[-1])
         print(obj_str)
         data = io.BytesIO()
-        # obj.download_fileobj(data)
-        # data.seek(0)
         print(data.getvalue())
-        # with gzip.open(data.getvalue(), "rb") as fin:
-        #     content = fin.read()
-        #     print(content)
-        #     j = json.loads(content.decode('utf-8'))
-        #     print(type(j))
+    
         with gzip.GzipFile(fileobj=obj.get()["Body"]) as gzipfile:
             content = gzipfile.readlines()
         for cont in content:
             decoded_content = cont.decode()
-            print(json.loads(decoded_content))
+            j = json.loads(decoded_content)
+            print(j)
             print("==========================================")
+            with table.batch_writer() as batch:
+                batch.put_item(Item=j)
        
 main()
