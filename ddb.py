@@ -35,6 +35,7 @@ def main():
         with gzip.GzipFile(fileobj=obj.get()["Body"]) as gzipfile:
             content = gzipfile.read()
             fix_bytes_value = content.replace(b"'", b'"')
+            print (fix_bytes_value)
             j = json.loads(fix_bytes_value.decode('utf-8'))
         print(type(j))
 
