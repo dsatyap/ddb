@@ -23,8 +23,9 @@ def main():
         print (obj_str)
 
         with open (obj_str, 'wb') as objdata:
-            obj.download_fileobj(objdata)
-        
+            obj.download_fileobj(obj.key)
+            new_dict = json.loads(objdata.getvalue().decode("utf-8"))
+            print (type(new_dict))
         #with gzip.open(contents.getvalue(), "r") as fin:
     
         #with gzip.open(obj_str, "r") as fin:
