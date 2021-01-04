@@ -23,7 +23,9 @@ def main():
         print (obj_str)
         data = io.BytesIO()
         obj.download_fileobj(data)
-        new_dict = json.loads(data.getvalue().decode("utf-8"))
-        print(new_dict['status']) 
+        with gzip.open(data.getvalue(), "r") as fin:
+            content = fin.read()
+            j = json.loads (content.decode('utf-8'))
+            print(type(j)) 
 
 main()
