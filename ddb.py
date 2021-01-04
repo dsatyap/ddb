@@ -9,15 +9,15 @@ import re
 
 def main():
     s3 = boto3.resource("s3")
-    bucket = s3.Bucket("test-bucket-shivam99aa")
+    bucket = s3.Bucket("careercompassri-test-deploy")
     print(bucket)
 
     ddb = boto3.resource('dynamodb')
-    #tablename = os.environ['TABLE_NAME']
+    tablename = "dlt-CareerCompassRI-dev-Skipper-ProfileTable"
     #table = ddb.Table(tablename)
 
     files = bucket.objects.filter(
-        Prefix="")
+        Prefix="AWSDynamoDB/01609430713846-ba34aa1b/data/")
     for obj in files:
         print('{0}'.format(obj.key))
         print('{0} is obj'.format(obj))
