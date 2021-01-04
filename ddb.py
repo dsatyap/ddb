@@ -1,3 +1,4 @@
+
 import boto3
 import json
 import os
@@ -12,9 +13,10 @@ def main():
     bucket = s3.Bucket("careercompassri-test-deploy")
     print(bucket)
 
-    ddb = boto3.resource('dynamodb')
-    tablename = "dlt-CareerCompassRI-dev-Skipper-ProfileTable"
-    table = ddb.Table(tablename)
+    # ddb = boto3.resource('dynamodb')
+    ddb_client = boto3.client('dynamodb')
+    #tablename = os.environ['TABLE_NAME']
+    # table = ddb.Table('test-shivam-dynamodb')
 
     files = bucket.objects.filter(
         Prefix="AWSDynamoDB/01609430713846-ba34aa1b/data/")
@@ -26,16 +28,17 @@ def main():
         obj_str = str(obj_list[-1])
         print(obj_str)
         data = io.BytesIO()
+        # obj.download_fileobj(data)
+        # data.seek(0)
         print(data.getvalue())
-    
+        
         with gzip.GzipFile(fileobj=obj.get()["Body"]) as gzipfile:
             content = gzipfile.readlines()
         for cont in content:
-            decoded_content = cont.decode()
-            j = json.loads(decoded_content)
-            print(j)
+            json_decoded_content = json.loads(cont.decode())
+            print(json_decoded_content)
+            response = ddb_client.put_item(
+                TableName='dlt-CareerCompassRI-dev-Skipper-ProfileTable', Item=json_decoded_content['Item'])
             print("==========================================")
-            with table.batch_writer() as batch:
-                batch.put_item(Item=j)
-       
+        
 main()
