@@ -23,7 +23,7 @@ def main():
         print (obj_str)
 
         with open (obj_str, 'wb') as objdata:
-            obj.download_fileobj(obj.key)
+            obj.download_fileobj(objdata)
         
         #with gzip.open(contents.getvalue(), "r") as fin:
     
