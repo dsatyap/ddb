@@ -16,19 +16,20 @@ def main():
     files = bucket.objects.filter(Prefix="AWSDynamoDB/01609430713846-ba34aa1b/data/")
     for obj in files:
         print('{0}'.format(obj.key))
+        obj = bucket.Object(obj.key)
+        print ('{0} is obj'.format(obj))
         obj_list = (obj.key.split('/'))
         obj_str = str(obj_list[-1])
         print (obj_str)
 
-        contents = io.BytesIO()
-        print (bucket.download_fileobj(obj.key, contents))
-        print (contents.seek(0))
-        print (contents.getvalue())
-        with gzip.open(contents.getvalue(), "r") as fin:
+        with open (obj_str, 'wb') as objdata:
+            obj.download_fileobj(obj.key)
+        
+        #with gzip.open(contents.getvalue(), "r") as fin:
     
         #with gzip.open(obj_str, "r") as fin:
-            data = fin.read()
+            """ data = fin.read()
             j = json.loads (data.decode('utf-8'))
-            print (type(j))
+            print (type(j)) """
 
 main()
