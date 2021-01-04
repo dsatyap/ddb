@@ -34,7 +34,7 @@ def main():
         #     print(type(j))
         with gzip.GzipFile(fileobj=obj.get()["Body"]) as gzipfile:
             content = gzipfile.read()
-        print(content)
+        print(type(content))
 
 
 main()
