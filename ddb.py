@@ -1,21 +1,23 @@
-
 import boto3
 import json
 import os
 import gzip
 import io
+# import simplejson
+import re
 
 
 def main():
     s3 = boto3.resource("s3")
-    bucket = s3.Bucket("careercompassri-test-deploy")
+    bucket = s3.Bucket("test-bucket-shivam99aa")
     print(bucket)
 
     ddb = boto3.resource('dynamodb')
-    tablename = "dlt-CareerCompassRI-dev-Skipper-ProfileTable"
-    table = ddb.Table(tablename)
+    #tablename = os.environ['TABLE_NAME']
+    #table = ddb.Table(tablename)
 
-    files = bucket.objects.filter(Prefix="AWSDynamoDB/01609430713846-ba34aa1b/data/")
+    files = bucket.objects.filter(
+        Prefix="")
     for obj in files:
         print('{0}'.format(obj.key))
         print('{0} is obj'.format(obj))
@@ -33,11 +35,10 @@ def main():
         #     j = json.loads(content.decode('utf-8'))
         #     print(type(j))
         with gzip.GzipFile(fileobj=obj.get()["Body"]) as gzipfile:
-            content = gzipfile.read()
-            fix_bytes_value = content.replace(b"'", b'"')
-            print (fix_bytes_value)
-            j = json.loads(fix_bytes_value.decode('utf-8'))
-        print(type(j))
-
-
+            content = gzipfile.readlines()
+        for cont in content:
+            decoded_content = cont.decode()
+            print(json.loads(decoded_content))
+            print("==========================================")
+       
 main()
